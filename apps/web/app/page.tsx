@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   coreSystemHorizontals,
   estimateStackGrade,
@@ -109,7 +109,12 @@ export default function Home() {
   );
   const [enabledSystems, setEnabledSystems] = useState<Record<string, boolean>>(
     () =>
-      Object.fromEntries(coreSystemHorizontals.map((system) => [system.key, true])),
+      Object.fromEntries(
+        coreSystemHorizontals.map((system) => [
+          system.key,
+          system.selectedBrand !== "TBD",
+        ]),
+      ),
   );
   const [profile, setProfile] = useState<PropertyProfile>(defaultProfile);
   const [analysis, setAnalysis] = useState<AnalysisResult>(fallbackReview);
@@ -120,6 +125,11 @@ export default function Home() {
     (system) => enabledSystems[system.key] !== false,
   );
   const estimatedGrade = estimateStackGrade(activeSystems, selections);
+
+  useEffect(() => {
+    setAnalysis(fallbackReview);
+    setError(null);
+  }, [selections, enabledSystems, profile]);
 
   function updateProfileNumber(
     key: Exclude<keyof PropertyProfile, "poolHouse">,
