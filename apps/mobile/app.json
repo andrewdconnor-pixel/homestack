@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "Home Stack",
+    "slug": "home-stack",
+    "scheme": "homestack",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

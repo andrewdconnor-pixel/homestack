@@ -1,0 +1,16 @@
+{
+  "name": "new-app-suite",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace web",
+    "dev:mobile": "npm run start --workspace mobile",
+    "build:web": "npm run build --workspace web",
+    "lint:web": "npm run lint --workspace web",
+    "typecheck": "npm run typecheck --workspace @new-app-suite/shared && npm run typecheck --workspace web && npm run typecheck --workspace mobile"
+  }
+}
